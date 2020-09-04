@@ -2,4 +2,5 @@ name: tidal_analysis
 dependencies:
         - numpy
         - matplotlib
+        - pandas
         - jupyter
