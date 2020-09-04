@@ -2,7 +2,7 @@
 
 A python package to extract harmonic components from a time series. 
 
-Try it out from the comfort of your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/callumrollo/quick_tidal_analysis/main)
+Try it out from the comfort of your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/callumrollo/quick_tidal_analysis/main?filepath=Explore.ipynb)
 
 May take a minute to load
 
