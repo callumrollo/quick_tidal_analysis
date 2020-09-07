@@ -73,8 +73,11 @@ def tidal_analysis(x, t, T=[12.4206], remove_trend=True, plot_results=False, fre
         # Define the function to optimize
         if freq_seek:
             # Optimises a cosine function by adjusting amp, frequency, phase and offset
-            optimize_func = lambda x: x[0]*np.cos(x[1]*t+x[2]) + x[3] - x_proc
+            optimize_func = lambda x: x[0]*np.cos((x[1]*t)+x[2]) + x[3] - x_proc
             est_amp, est_freq, est_phase, est_mean = leastsq(optimize_func, [guess_amp, guess_freq, 0, 0])[0]
+            # Can return phases with mag greater than pi for some reason
+            while np.abs(est_phase)>np.pi:
+                est_phase = (np.abs(est_phase) - 2*np.pi) * est_phase/np.abs(est_phase)
         else:
             # Optimises a cosine function by adjusting amp, phase and offset
             optimize_func = lambda x: x[0]*np.cos(guess_freq*t+x[1]) + x[2] - x_proc
@@ -87,7 +90,7 @@ def tidal_analysis(x, t, T=[12.4206], remove_trend=True, plot_results=False, fre
         means.append(est_mean)
         const_ids.append("T"+str(i+1))
         
-        # Crease the fitted cosine curve using the optimized parameters
+        # Recreare the fitted cosine curve using the optimized parameters
         data_fit = est_amp * np.cos(est_freq*t+est_phase) + est_mean
         df[f"x_T{i+1}"] = data_fit
         df['T_summed'] = df['T_summed'] + data_fit
