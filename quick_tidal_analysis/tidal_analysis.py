@@ -31,6 +31,10 @@ def tidal_analysis(x, t, T=[12.4206], remove_trend=True, plot_results=False, fre
     Original matlab function by Rob Hall (Aug 2014)
     Adapted to Python by Callum Rollo (Sep 2020)
     """  
+    # Remove infinite and nan values from input
+    t = t[np.isfinite(x)]
+    x = x[np.isfinite(x)]
+
     # Create dataframe for variables
     df = pd.DataFrame({"time_yday": t, "x": x})
     df = df.set_index("time_yday")
