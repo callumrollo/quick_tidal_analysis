@@ -2,7 +2,7 @@
 
 A python package to extract harmonic components from a time series. 
 
-Try it out from the comfort of your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/callumrollo/quick_tidal_analysis/main)
+Try it out from the comfort of your browser: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/callumrollo/quick_tidal_analysis/main?filepath=Explore.ipynb)
 
 May take a minute to load
 
@@ -24,4 +24,4 @@ To extract periodic sinusoids at 12 and 24 hour periods from a variable `x` samp
 `df_fine` finely sampled (0.001 days) time series of tidal signals\
     
 
-Check out the notebook [Explore.ipynb](https://github.com/callumrollo/quick_tidal_analysis/blob/main/Explore.ipynb) for more examples
+Check out the notebook [Explore.ipynb](https://nbviewer.jupyter.org/github/callumrollo/quick_tidal_analysis/blob/main/Explore.ipynb) for more examples
