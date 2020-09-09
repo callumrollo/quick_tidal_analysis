@@ -46,13 +46,13 @@ def test_out_phase_triple_cosine():
                                              
 def test_noise():
     # Single noisy cosine wave accuracy requirements:
-    # Noise is 0.5 * amplitude of wave
-    # amp to 1 part in 50
-    # phase to 1 degree
-    t = np.arange(0,10,0.01)
+    # Noise is gaussian centered on 0 at half amplitude of wave
+    # amp to 1 part in 10
+    # phase to 2 degrees
+    t = np.arange(0,20,0.01)
     phase =  np.pi * (np.random.rand() - 0.5)
-    x = np.cos(t*2*np.pi + phase) + 0.5*(np.random.rand((len(t)))-0.5) 
+    x = np.cos(t*2*np.pi + phase) + 0.5*np.random.randn((len(t)))
     __, const, __ =  tidal_analysis(x,t,T=[24])
-    assert math.isclose(const.amplitude.T1, 1, rel_tol=0.02)
-    assert math.isclose(const.phase.T1, phase, abs_tol=np.pi/180)
+    assert math.isclose(const.amplitude.T1, 1, rel_tol=0.05)
+    assert math.isclose(const.phase.T1, phase, abs_tol=np.pi/90)
 
