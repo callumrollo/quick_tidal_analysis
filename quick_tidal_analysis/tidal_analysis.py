@@ -74,14 +74,15 @@ def tidal_analysis(x, t, T=[12.4206], remove_trend=True, plot_results=False, fre
         if freq_seek:
             # Optimises a cosine function by adjusting amp, frequency, phase and offset
             optimize_func = lambda x: x[0]*np.cos((x[1]*t)+x[2]) + x[3] - x_proc
-            est_amp, est_freq, est_phase, est_mean = leastsq(optimize_func, [guess_amp, guess_freq, 0, 0])[0]
+            est_amp, est_freq, est_phase, est_mean = leastsq(optimize_func, [guess_amp, guess_freq, 2*np.pi*(np.random.rand()-0.5), 0])[0]
             # Can return phases with mag greater than pi for some reason
             while np.abs(est_phase)>np.pi:
                 est_phase = (np.abs(est_phase) - 2*np.pi) * est_phase/np.abs(est_phase)
         else:
             # Optimises a cosine function by adjusting amp, phase and offset
+            # Initial guess: amp = std deviation of signal, phase random number n where -pi < n < pi, offset = 0
             optimize_func = lambda x: x[0]*np.cos(guess_freq*t+x[1]) + x[2] - x_proc
-            est_amp,  est_phase, est_mean = leastsq(optimize_func, [guess_amp, 0, 0])[0]  
+            est_amp,  est_phase, est_mean = leastsq(optimize_func, [guess_amp, 2*np.pi*(np.random.rand()-0.5), 0])[0]  
             est_freq = guess_freq
         # Append the values defining the cosine curve to the lists
         amps.append(np.abs(est_amp))
